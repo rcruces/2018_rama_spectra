@@ -26,7 +26,7 @@ require("baseline")
 # Package for ploting heatmaps
 require(gplots)
 # Set path "CHANGE THIS for your local path"
-setwd("/home/rr/git_here/2017_spectroscopy-AUC/")
+setwd("/home/rr/git_here/rama_spectra/")
 ```
 
 ```{r echo=FALSE}
