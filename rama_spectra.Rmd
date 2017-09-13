@@ -55,7 +55,7 @@ corr_data<-raw_data
 rm(wb,spectros,sheets,i)
 ```
 
-## Baseline Correction  
+# Step 2: Baseline Correction  
 Baseline is corrected with a 2nd derivative constrained weighted regression. It was the optimal method provided from the package `baseline` from R.  
 The next two graphs show the raw data of Control.1-area.1 on the left with the baseline fitted (red line) and the baseline fitted on the right.  
 
@@ -77,7 +77,7 @@ for (i in 1:n) {
   plot(wavelengt,corr_data[,1],type='l',main="Baseline Corrected",ylim=c(0,1500),ylab="Amplituded",bty='l')
 ```
   
-# Signal to Noise Ratio  
+# Step 3: Signal to Noise Ratio  
 The SNR was caculated here in case is needed for further analysis, as a cofounding variable, as a set up for smothing or just as quality control check point. Blue are control cases, red experimental.  
 ```{r echo=FALSE}
   snr<-apply(corr_data,2,mad)/apply(corr_data,2,sd)
@@ -85,7 +85,7 @@ The SNR was caculated here in case is needed for further analysis, as a cofoundi
   abline(h=0.4,lty=2,lwd=2,col="red")
 ```
 
-# Smoothing of the signal  
+# Step 4: Smoothing of the signal  
 Two options here the Nadayara-Watson Kernel or a fast furier transformation with convolution.  
 The smoothing of the signal is made in order to improve the SNR.  
 
@@ -112,7 +112,7 @@ for (i in 1:n) {
 x<-ksmooth(wavelengt, y, "normal", bandwidth = 5)[[1]]
 ```
   
-# Normalization of the data & Peak detection  
+# Step 5: Normalization of the data & Peak detection  
 This is done in two steps first we normalized all data to the Mean Absolute Deviation (MAD) and then we search those peaks that are above 2 standart deviation of the MAD. 
 ```{r echo=FALSE} 
   # Normalization with Mean Absolute Deviation 
@@ -140,7 +140,8 @@ This is done in two steps first we normalized all data to the Mean Absolute Devi
     points(x[peaks.coord[,1]],peaks.coord[,2],col="red4",bg="red",pch=21,lwd=1.5)
 ```  
 
-# Heatmap of all cases  
+# Step 6: Data Visualization  
+### Heatmap of all cases  
 ```{r echo=FALSE} 
 # grupos
 grupos<-c(rep("c1",6),rep("c2",6),rep("c3",6),rep("c4",6),rep("c5",6),
@@ -171,7 +172,7 @@ heatmap.2(spect.fit,
 ```
   
   
-# Detection of duplicated data & Heatmap of Non-duplicated data   
+### Detection of duplicated data & Heatmap of Non-duplicated data   
 ```{r echo=FALSE} 
 # Find Duplicates
 # Data frame of the first line
@@ -203,7 +204,7 @@ heatmap.2(spect.fit[-a,],
 )
 ```
  
-# Control vs Experiment spectra  
+#### Control vs Experiment spectra  
 ```{r echo=FALSE} 
 # # # AVERAGE CONTROL vs EXPERIMENTS # # # #
 # PLot the controls
@@ -226,7 +227,7 @@ lines(x,y,col=colG[10],lwd=1.5)
 lines(x,y1,col=colG[5],lwd=1.5)
 ```
 
-# Spectral Comparison  
+# Step 7: Spectral Comparison  
 ... working on the theory ....
 
 
