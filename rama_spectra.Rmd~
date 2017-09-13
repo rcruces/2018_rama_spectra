@@ -27,6 +27,7 @@ require("baseline")
 require(gplots)
 # Set path "CHANGE THIS for your local path"
 setwd("/home/rr/git_here/2017_spectroscopy-AUC/")
+source("/home/rr/Dropbox/VolTA/addTrans.R")
 ```
 
 ```{r echo=FALSE}
@@ -88,7 +89,7 @@ The SNR was caculated here in case is needed for further analysis, as a cofoundi
 # Smoothing of the signal  
 Two options here the Nadayara-Watson Kernel or a fast furier transformation with convolution.  
 The smoothing of the signal is made in order to improve the SNR.  
-
+**Note:** I still need to interpole the smoothing to the wavelenght!!!
 ```{r echo=FALSE, fig.width=8,fig.height=4}
   par(mfrow=c(1,2))
   # 1 Non-linear Nadaraya-Watson Kernel

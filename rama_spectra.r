@@ -1,22 +1,15 @@
----
-title: "Rama Spectra Analysis"
-author: "Raúl Rodríguez-Cruces"
-date: "11 de julio de 2017"
-output: 
-  md_document:
-    variant: markdown_github
-    toc: true
-    toc_depth: 2
----
+####################################################################################### title: "Rama Spectra Analysis"
+# author: "Raúl Rodríguez-Cruces"
+# raulrcruces@inb.unam.mx
+######################################################################################
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+#--------------------------------------------
+#### Step 1: Data reading & ordering  ####
+#--------------------------------------------
+# The first steps only uploads the `xlsx` file and concatenates each sheet into one woorkbook.
 
-# Step 1: Data reading & ordering  
-The first steps only uploads the `xlsx` file and concatenates each sheet into one woorkbook.
-
-```{r, echo=FALSE,results='hide', message=FALSE, warning=FALSE}
+# PACKAGES
+#----------------------------
 # Package for xlsx reading
 # java JDK should be installed for xlsx package to work properly
 require("xlsx")
@@ -25,11 +18,10 @@ require("hyperSpec")
 require("baseline")
 # Package for ploting heatmaps
 require(gplots)
+
 # Set path "CHANGE THIS for your local path"
 setwd("/home/rr/git_here/2017_spectroscopy-AUC/")
-```
 
-```{r echo=FALSE}
 # Loads the xlsx file to java object
 wb <- loadWorkbook("./Data-Raman_Raul.xlsx")
 
@@ -53,15 +45,10 @@ corr_data<-raw_data
 
 # removes unnecessary variables
 rm(wb,spectros,sheets,i)
-```
 
-## Baseline Correction  
-Baseline is corrected with a 2nd derivative constrained weighted regression. It was the optimal method provided from the package `baseline` from R.  
-The next two graphs show the raw data of Control.1-area.1 on the left with the baseline fitted (red line) and the baseline fitted on the right.  
-
-
-```{r echo=FALSE, fig.width=8,fig.height=4}
-# Baseline Correction
+#--------------------------------------------
+#### Baseline Correction ####
+#--------------------------------------------
 n=length(corr_data[1,])
 for (i in 1:n) {
   corrected <- new ("hyperSpec", spc = raw_data[,i], wavelength = wavelengt)
@@ -75,21 +62,19 @@ for (i in 1:n) {
   plot(wavelengt,raw_data[,1],type='l',main="Raw Data",ylab="Amplituded",bty='l')
   lines(wavelengt,Base,col="red")
   plot(wavelengt,corr_data[,1],type='l',main="Baseline Corrected",ylim=c(0,1500),ylab="Amplituded",bty='l')
-```
-  
-# Signal to Noise Ratio  
-The SNR was caculated here in case is needed for further analysis, as a cofounding variable, as a set up for smothing or just as quality control check point. Blue are control cases, red experimental.  
-```{r echo=FALSE}
+
+
+#--------------------------------------------  
+#### Signal to Noise Ratio  ####
+#--------------------------------------------
   snr<-apply(corr_data,2,mad)/apply(corr_data,2,sd)
   barplot(snr,ylab="ratio",main="Signal to Noise",xlab="",col=c(rep("dodgerblue",30),rep("firebrick1",29)),border = c(rep("dodgerblue4",30),rep("firebrick3",29)))
   abline(h=0.4,lty=2,lwd=2,col="red")
-```
 
-# Smoothing of the signal  
-Two options here the Nadayara-Watson Kernel or a fast furier transformation with convolution.  
-The smoothing of the signal is made in order to improve the SNR.  
 
-```{r echo=FALSE, fig.width=8,fig.height=4}
+#--------------------------------------------
+#### Smoothing of the signal  #### 
+#--------------------------------------------
   par(mfrow=c(1,2))
   # 1 Non-linear Nadaraya-Watson Kernel
     y<-corr_data[,1]
@@ -110,11 +95,10 @@ for (i in 1:n) {
   Smooth[[i]]<-ksmooth(wavelengt, y, "normal", bandwidth = 5)[[2]]
 }
 x<-ksmooth(wavelengt, y, "normal", bandwidth = 5)[[1]]
-```
-  
-# Normalization of the data & Peak detection  
-This is done in two steps first we normalized all data to the Mean Absolute Deviation (MAD) and then we search those peaks that are above 2 standart deviation of the MAD. 
-```{r echo=FALSE} 
+
+#---------------------------------------------------------------
+#### Normalization of the data & Peak detection  #### 
+#---------------------------------------------------------------
   # Normalization with Mean Absolute Deviation 
     smth<-Smooth[[1]]
     MAD<-sapply(smth,simplify=TRUE, function (x) (x-median(smth))/mad(smth))
@@ -138,10 +122,10 @@ This is done in two steps first we normalized all data to the Mean Absolute Devi
     abline(h=c(0,2),lwd=1.5,lty=c(2,1),col="red")
     lines(x,peaks,col="blue")
     points(x[peaks.coord[,1]],peaks.coord[,2],col="red4",bg="red",pch=21,lwd=1.5)
-```  
-
-# Heatmap of all cases  
-```{r echo=FALSE} 
+ 
+#--------------------------------------------
+#### Heatmap of all cases  #### 
+#--------------------------------------------
 # grupos
 grupos<-c(rep("c1",6),rep("c2",6),rep("c3",6),rep("c4",6),rep("c5",6),
           rep("e1",6),rep("e2",6),rep("e3",6),rep("e4",6),rep("e5",5))
@@ -168,11 +152,11 @@ heatmap.2(spect.fit,
           labRow =names(corr_data),
           labCol = rep("",length(870))
 )
-```
+
   
-  
-# Detection of duplicated data & Heatmap of Non-duplicated data   
-```{r echo=FALSE} 
+#--------------------------------------------  
+#### Detection of duplicated data & Heatmap of Non-duplicated data ####   
+#--------------------------------------------
 # Find Duplicates
 # Data frame of the first line
 df <- data.frame(a = as.numeric(raw_data[1,]))
@@ -201,11 +185,11 @@ heatmap.2(spect.fit[-a,],
           labRow =names(corr_data[-a]),
           labCol = rep("",length(870))
 )
-```
- 
-# Control vs Experiment spectra  
-```{r echo=FALSE} 
-# # # AVERAGE CONTROL vs EXPERIMENTS # # # #
+
+#-------------------------------------------- 
+#### Control vs Experiment spectra  #### 
+#--------------------------------------------
+# AVERAGE CONTROL vs EXPERIMENTS
 # PLot the controls
 y<-apply(spect.fit[31:59,],2,mean)
 y1<-apply(spect.fit[1:30,],2,mean)
@@ -224,9 +208,9 @@ Diff<-rbind(cbind(x,y1),cbind(rev(x),rev(y)),cbind(x[1],y1[1]))
 polygon(Diff,col="#EEB422C8",border = NA)
 lines(x,y,col=colG[10],lwd=1.5)
 lines(x,y1,col=colG[5],lwd=1.5)
-```
 
-# Spectral comparison Comparison  
-
+#--------------------------------------------
+#### Spectral comparison Comparison  #### 
+#--------------------------------------------
 
 
