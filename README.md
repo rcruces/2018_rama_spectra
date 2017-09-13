@@ -65,5 +65,5 @@ Control vs Experiment spectra
 
 ![](rama_spectra_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
-Spectral comparison Comparison
+Spectral Comparison
 ==============================
