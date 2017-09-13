@@ -6,7 +6,7 @@
 -   [Heatmap of all cases](#heatmap-of-all-cases)
 -   [Detection of duplicated data & Heatmap of Non-duplicated data](#detection-of-duplicated-data-heatmap-of-non-duplicated-data)
 -   [Control vs Experiment spectra](#control-vs-experiment-spectra)
--   [Spectral comparison Comparison](#spectral-comparison-comparison)
+-   [Spectral Comparison](#spectral-comparison)
 
 Step 1: Data reading & ordering
 ===============================
