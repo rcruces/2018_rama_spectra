@@ -226,7 +226,8 @@ lines(x,y,col=colG[10],lwd=1.5)
 lines(x,y1,col=colG[5],lwd=1.5)
 ```
 
-# Spectral comparison Comparison  
+# Spectral Comparison  
+... working on the theory ....
 
 
 
