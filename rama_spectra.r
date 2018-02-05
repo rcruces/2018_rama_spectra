@@ -10,17 +10,16 @@
 
 # PACKAGES
 #----------------------------
-# Package for xlsx reading
+# This code requires the previous installation of the following R-packages: lazyeval, ggplot2, hyperSpec, baseline, gplots, rJava & xlsx
 # java JDK should be installed for xlsx package to work properly
-require("xlsx")
-# Requires the following packages: lazyeval, ggplot2 & hyperSpec
-require("hyperSpec")
-require("baseline")
-# Package for ploting heatmaps
-require(gplots)
 
-# Set path "CHANGE THIS for your local path"
-setwd("/home/rr/git_here/2017_spectroscopy-AUC/")
+require("xlsx")        # Read xlsx documents
+require("hyperSpec")   # For spectrum analysis
+require("baseline")    # For baseline analysis
+require("gplots")      # Package for ploting heatmaps
+
+# Set path 
+setwd("/home/rr/git_here/2017_spectroscopy-AUC/")  # <<--CHANGE THIS for your local path
 
 # Loads the xlsx file to java object
 wb <- loadWorkbook("./Data-Raman_Raul.xlsx")
