@@ -1,15 +1,25 @@
--   [Step 1: Data reading & ordering](#step-1-data-reading-ordering)
+Rama Spectra Analysis
+=====================
+-   [Step 1: Data reading and ordering](#step-1-data-reading-and-ordering)
 -   [Step 2: Baseline Correction](#step-2-baseline-correction)
 -   [Step 3: Signal to Noise Ratio](#step-3-signal-to-noise-ratio)
 -   [Step 4: Smoothing of the signal](#step-4-smoothing-of-the-signal)
--   [Step 5: Normalization of the data & Peak detection](#step-5-normalization-of-the-data-peak-detection)
+-   [Step 5: Normalization of the data and Peak detection](#step-5-normalization-of-the-data-and-peak-detection)
 -   [Step 6: Data Visualization](#step-6-data-visualization)
     -   [Heatmap of all cases](#heatmap-of-all-cases)
-    -   [Detection of duplicated data & Heatmap of Non-duplicated data](#detection-of-duplicated-data-heatmap-of-non-duplicated-data)
+    -   [Detection of duplicated data and Heatmap of Non-duplicated data](#detection-of-duplicated-data-and-heatmap-of-non-duplicated-data)
 -   [Step 7: Spectral Comparison](#step-7-spectral-comparison)
 
-Step 1: Data reading & ordering
-===============================
+Repository Content:
+-------------------
+1. `rama_spectra_files/figure-markdown_github`: Directory with the figures.  
+1. `Data-Raman_Raul.xlsx`: Dataset  
+1. `README.md`: This is a markdown document.   
+1. `rama_spectra.Rmd`: This is a R-markdown document that generates the markdown document for github documentation.  
+1. **`rama_spectra.r`: THIS IS THE R-CODE.**  
+
+Step 1: Data reading and ordering
+=================================
 
 The first steps only uploads the `xlsx` file and concatenates each sheet into one woorkbook.
 
@@ -46,7 +56,7 @@ The smoothing of the signal is made in order to improve the SNR.
 
 ![](rama_spectra_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
-Step 5: Normalization of the data & Peak detection
+Step 5: Normalization of the data and Peak detection
 ==================================================
 
 This is done in two steps first we normalized all data to the Mean Absolute Deviation (MAD) and then we search those peaks that are above 2 standart deviation of the MAD. ![](rama_spectra_files/figure-markdown_github/unnamed-chunk-6-1.png)
@@ -58,7 +68,7 @@ Step 6: Data Visualization
 
 ![](rama_spectra_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
-### Detection of duplicated data & Heatmap of Non-duplicated data
+### Detection of duplicated data and Heatmap of Non-duplicated data
 
 ![](rama_spectra_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
