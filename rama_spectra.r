@@ -19,7 +19,7 @@ require("baseline")    # For baseline analysis
 require("gplots")      # Package for ploting heatmaps
 
 # Set path 
-setwd("/home/rr/git_here/2017_spectroscopy-AUC/")  # <<--CHANGE THIS for your local path
+setwd("/home/rr/git_here/rama_spectra/")  # <<--CHANGE THIS for your local path
 
 # Loads the xlsx file to java object
 wb <- loadWorkbook("./Data-Raman_Raul.xlsx")
