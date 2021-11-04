@@ -1,5 +1,12 @@
 Rama Spectra Analysis
 =====================
+This repository contains part of the code used in the publication:  
+
+_Khan MS, Rodríguez-Cruces R, Cheng SH, Lau C._ (2020) __Glymphatic clearance of simulated silicon dispersion in mouse brain analyzed by laser induced breakdown spectroscopy__. Heliyon (6) e03702. DOI https://doi.org/10.1016/j.heliyon.2020.e03702
+
+
+Processing steps:
+-------------------
 -   [Step 1: Data reading and ordering](#step-1-data-reading-and-ordering)
 -   [Step 2: Baseline Correction](#step-2-baseline-correction)
 -   [Step 3: Signal to Noise Ratio](#step-3-signal-to-noise-ratio)
@@ -76,7 +83,3 @@ Step 6: Data Visualization
 
 ![](rama_spectra_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
-Step 7: Spectral Comparison
-===========================
-
-... working on the theory ....
